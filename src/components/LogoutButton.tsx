@@ -6,7 +6,7 @@ export default function LogoutButton() {
   return (
     <button
       onClick={() => signOut().then(() => redirect("/api/auth/signin"))}
-      className="text-sm text-white hover:underline"
+      className="text-sm text-white hover:underline cursor-pointer"
     >
       Logout
     </button>
