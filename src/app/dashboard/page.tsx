@@ -16,13 +16,6 @@ export const metadata = {
     locale: "en_US",
     type: "website",
   },
-  twitter: {
-    card: "summary_large_image",
-    title: "Todo App – Next.js + Prisma",
-    description: "Secure login, fast performance. Your todo manager, redefined.",
-    images: ["https://your-vercel-url.vercel.app/og-image.png"],
-    creator: "@yourhandle",
-  },
 };
 
 
