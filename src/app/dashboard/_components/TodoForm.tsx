@@ -1,47 +1,54 @@
 "use client";
 
-import { useState } from "react";
+import { useForm } from "react-hook-form";
+import { useEffect } from "react";
+import { Todo } from "@/types/type";
 
-export default function TodoForm() {
-  const [title, setTitle] = useState("");
-  const [loading, setLoading] = useState(false);
+interface TodoFormProps {
+  onTodoAdded: () => void;
+  editing: Todo | null;
+  setEditing: (todo: Todo | null) => void;
+}
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!title.trim()) return;
+type FormData = {
+  title: string;
+};
 
-    setLoading(true);
+export default function TodoForm({ onTodoAdded, editing, setEditing }: TodoFormProps) {
+  const { register, handleSubmit, reset } = useForm<FormData>();
 
-    const res = await fetch("api/todo", {
-      method: "POST",
-      body: JSON.stringify({ title }),
+  useEffect(() => {
+    if (editing) {
+      reset({ title: editing.title });
+    } else {
+      reset({ title: "" });
+    }
+  }, [editing, reset]);
+
+  const onSubmit = async (data: FormData) => {
+    const method = editing ? "PUT" : "POST";
+    const res = await fetch("/api/todo", {
+      method,
       headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(editing ? { ...editing, title: data.title } : data),
     });
 
     if (res.ok) {
-      setTitle("");
-      location.reload(); // Quick refresh to get updated todos
-    } else {
-      alert("Failed to add todo.");
+      reset();
+      setEditing(null);
+      onTodoAdded();
     }
-
-    setLoading(false);
   };
 
   return (
-    <form onSubmit={handleSubmit} className="flex gap-2">
+    <form onSubmit={handleSubmit(onSubmit)} className="flex gap-2">
       <input
-        value={title}
-        onChange={(e) => setTitle(e.target.value)}
-        placeholder="Enter a new todo..."
-        className="flex-1 px-4 py-2 rounded border border-gray-300"
+        {...register("title", { required: true })}
+        placeholder="Enter a todo"
+        className="flex-1 border px-3 py-2 rounded"
       />
-      <button
-        type="submit"
-        disabled={loading}
-        className="bg-black text-white px-4 py-2 rounded hover:bg-gray-800"
-      >
-        {loading ? "Adding..." : "Add"}
+      <button type="submit" className="bg-black text-white px-4 py-2 rounded">
+        {editing ? "Update" : "Add"}
       </button>
     </form>
   );
