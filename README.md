@@ -1,36 +1,48 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# ✅ Todo App — Next.js + NextAuth + Prisma + PostgreSQL
 
-## Getting Started
+A modern, full-stack Todo App built with Next.js App Router, Google & GitHub authentication, Prisma ORM, PostgreSQL (via Neon), and deployed on Vercel.
 
-First, run the development server:
+---
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## ✨ Features
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- 🔐 Google & GitHub OAuth login via **NextAuth**
+- 📝 Authenticated users can **create and view personal todos**
+- 🧠 Uses **Prisma ORM** with PostgreSQL (Neon)
+- 💡 Built with **Next.js App Router** and **Server Components**
+- 🎨 Styled using **Tailwind CSS**
+- 🚀 Deployed on **Vercel**
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+---
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 📷 Preview
 
-## Learn More
+![screenshot](public/screenshot.png) <!-- optional -->
 
-To learn more about Next.js, take a look at the following resources:
+---
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 🔧 Tech Stack
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+| Tech         | Purpose                         |
+|--------------|---------------------------------|
+| Next.js      | Full-stack framework (App Router) |
+| NextAuth     | Authentication (Google & GitHub) |
+| Prisma       | ORM to interact with PostgreSQL |
+| PostgreSQL   | Database via Neon               |
+| Tailwind CSS | Styling                         |
+| Vercel       | Deployment                      |
 
-## Deploy on Vercel
+---
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## ⚙️ Environment Variables
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Make sure to add the following in your `.env.local` (and in Vercel → Project Settings → Env Vars):
+
+```env
+DATABASE_URL=your_postgres_url
+GOOGLE_CLIENT_ID=your_google_id
+GOOGLE_CLIENT_SECRET=your_google_secret
+GITHUB_ID=your_github_id
+GITHUB_SECRET=your_github_secret
+NEXTAUTH_URL=http://localhost:3000
+NEXTAUTH_SECRET=your_random_secret
